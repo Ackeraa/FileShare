@@ -8,6 +8,10 @@ app = Flask(__name__)
 
 limiter = Limiter(key_func=get_remote_address, app=app)
 
+@app.route("/")
+def index():
+    return "<h1 style='color:blue'>Welcome to FileShare!</h1>"
+
 @app.route("/download/<filename>")
 @limiter.limit("1 per 3 minute")
 def download(filename):
